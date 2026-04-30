@@ -18,6 +18,7 @@ const __dirname = path.dirname(__filename);
 // Middleware
 const allowedOrigins = new Set([
   process.env.CLIENT_URL,
+  process.env.CLIENT_URL_2,
   'http://localhost:5173',
   'http://127.0.0.1:5173',
 ].filter(Boolean));
@@ -29,6 +30,11 @@ app.use(cors({
 
     // Explicit allowlist first
     if (allowedOrigins.has(origin)) return callback(null, true);
+
+    // Allow Vercel preview/prod frontend domains
+    if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin)) {
+      return callback(null, true);
+    }
 
     // In development, allow LAN Vite hosts (http://<lan-ip>:5173)
     if (
