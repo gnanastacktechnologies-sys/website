@@ -2,6 +2,9 @@
   "name": "gnanastack-server",
   "version": "1.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=22.12.0 <23"
+  },
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
