@@ -15,6 +15,28 @@ export const getSiteData = asyncHandler(async (req, res) => {
   res.json({ success: true, data: settings });
 });
 
+// @desc    Get all home page data (consolidated)
+// @route   GET /api/v1/public/home
+// @access  Public
+export const getHomeData = asyncHandler(async (req, res) => {
+  const [settings, products, services, projects] = await Promise.all([
+    SiteSetting.findOne(),
+    Product.find({ isActive: true }).sort('order'),
+    Service.find({ isActive: true }).sort('order'),
+    Project.find({ isActive: true }).sort('order'),
+  ]);
+
+  res.json({
+    success: true,
+    data: {
+      settings,
+      products,
+      services,
+      projects
+    }
+  });
+});
+
 // @desc    Get active products
 // @route   GET /api/v1/public/products
 // @access  Public

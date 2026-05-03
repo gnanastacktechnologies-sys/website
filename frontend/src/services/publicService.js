@@ -1,6 +1,10 @@
 import api from './api';
 
 export const publicService = {
+  getHomeData: async () => {
+    const response = await api.get('/public/home');
+    return response.data;
+  },
   getSiteData: async () => {
     const response = await api.get('/public/site');
     return response.data;

@@ -66,33 +66,25 @@ const mapFallbackProjects = () =>
   }));
 
 const Home = () => {
-  const [siteData, setSiteData] = useState(null);
-  const [products, setProducts] = useState([]);
-  const [services, setServices] = useState([]);
-  const [projects, setProjects] = useState([]);
+  const [siteData, setSiteData] = useState(fallbackSiteData);
+  const [products, setProducts] = useState(mapFallbackProducts());
+  const [services, setServices] = useState(mapFallbackServices());
+  const [projects, setProjects] = useState(mapFallbackProjects());
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [siteRes, prodRes, servRes, projRes] = await Promise.all([
-          publicService.getSiteData(),
-          publicService.getProducts(),
-          publicService.getServices(),
-          publicService.getProjects(),
-        ]);
+        const res = await publicService.getHomeData();
+        const { settings, products, services, projects } = res.data;
 
-        setSiteData(siteRes.data);
-        setProducts(prodRes.data);
-        setServices(servRes.data);
-        setProjects(projRes.data);
+        if (settings) setSiteData(settings);
+        if (products?.length) setProducts(products);
+        if (services?.length) setServices(services);
+        if (projects?.length) setProjects(projects);
       } catch (error) {
-        console.error('Failed to fetch home data. Showing fallback content.', error);
-        setSiteData(fallbackSiteData);
-        setProducts(mapFallbackProducts());
-        setServices(mapFallbackServices());
-        setProjects(mapFallbackProjects());
+        console.error('Failed to fetch home data. Using fallback content.', error);
       } finally {
         setLoading(false);
       }
@@ -108,16 +100,18 @@ const Home = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-primary flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-indigo"></div>
-      </div>
-    );
-  }
+  // We no longer return a full-page spinner. 
+  // The user sees the fallback content immediately while the real data fetches.
+  // This drastically improves "perceived" load time.
+
 
   return (
     <>
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-1 z-[100] overflow-hidden bg-primary">
+          <div className="h-full bg-indigo animate-loading-bar shadow-[0_0_10px_#4f46e5]"></div>
+        </div>
+      )}
       <Hero settings={siteData} />
       <TechStack />
       <Products 

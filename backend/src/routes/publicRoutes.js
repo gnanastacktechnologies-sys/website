@@ -7,10 +7,12 @@ import {
   getActiveProjectById,
   submitEnquiry,
   getStorageCheck,
+  getHomeData,
 } from '../controllers/publicController.js';
 
 const router = express.Router();
 
+router.get('/home', getHomeData);
 router.get('/site', getSiteData);
 router.get('/products', getActiveProducts);
 router.get('/services', getActiveServices);
