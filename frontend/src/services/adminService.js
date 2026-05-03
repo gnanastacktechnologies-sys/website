@@ -110,5 +110,14 @@ export const adminService = {
   deleteEnquiry: async (id) => {
     const response = await api.delete(`/admin/enquiries/${id}`);
     return response.data;
+  },
+  // Legal
+  getLegalData: async () => {
+    const response = await api.get('/admin/legal');
+    return response.data;
+  },
+  updateLegalData: async (data) => {
+    const response = await api.patch('/admin/legal', data);
+    return response.data;
   }
 };

@@ -9,6 +9,7 @@ import {
   getStorageCheck,
   getHomeData,
 } from '../controllers/publicController.js';
+import { getLegalData } from '../controllers/legalController.js';
 
 const router = express.Router();
 
@@ -20,5 +21,6 @@ router.get('/projects', getActiveProjects);
 router.get('/projects/:id', getActiveProjectById);
 router.post('/enquiries', submitEnquiry);
 router.get('/storage-check', getStorageCheck);
+router.get('/legal', getLegalData);
 
 export default router;

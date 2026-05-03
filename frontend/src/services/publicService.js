@@ -28,5 +28,9 @@ export const publicService = {
   submitEnquiry: async (data) => {
     const response = await api.post('/public/enquiries', data);
     return response.data;
+  },
+  getLegalData: async () => {
+    const response = await api.get('/public/legal');
+    return response.data;
   }
 };

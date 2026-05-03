@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom';
 import { navLinks } from '../../data/siteData';
+import { useSite } from '../../hooks/useSite';
 
 const Footer = () => {
+  const { products } = useSite();
   return (
     <footer className="bg-primary pt-20 pb-10 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,9 +35,9 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Our Products</h4>
             <ul className="space-y-4">
-               {["GnanaHRMS", "GnanaTest Portal", "GnanaInvite", "Custom MERN Applications"].map(product => (
-                 <li key={product} className="text-muted text-sm hover:text-indigo cursor-pointer transition-colors">
-                   {product}
+               {products.map(product => (
+                 <li key={product._id} className="text-muted text-sm hover:text-indigo cursor-pointer transition-colors">
+                   {product.title}
                  </li>
                ))}
             </ul>
@@ -54,9 +57,11 @@ const Footer = () => {
           <p className="text-muted text-xs">
             © 2026 GnanaStack Technologies. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <a href="#" className="text-muted hover:text-white transition-colors text-xs uppercase tracking-widest font-bold">Privacy Policy</a>
-            <a href="#" className="text-muted hover:text-white transition-colors text-xs uppercase tracking-widest font-bold">Terms of Service</a>
+          <div className="flex flex-wrap gap-x-8 gap-y-2 justify-center md:justify-start">
+            <Link to="/privacy-policy" className="text-muted hover:text-white transition-colors text-xs uppercase tracking-widest font-bold">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="text-muted hover:text-white transition-colors text-xs uppercase tracking-widest font-bold">Terms of Service</Link>
+            <Link to="/refund-policy" className="text-muted hover:text-white transition-colors text-xs uppercase tracking-widest font-bold">Refund Policy</Link>
+            <Link to="/cancellation-policy" className="text-muted hover:text-white transition-colors text-xs uppercase tracking-widest font-bold">Cancellation Policy</Link>
           </div>
         </div>
       </div>

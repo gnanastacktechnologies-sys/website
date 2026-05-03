@@ -33,6 +33,7 @@ import {
   deleteEnquiry,
   getDashboardStats,
 } from '../controllers/enquiryController.js';
+import { getLegalData, updateLegalData } from '../controllers/legalController.js';
 
 const router = express.Router();
 
@@ -82,5 +83,10 @@ router.route('/enquiries/:id')
   .get(getEnquiryById)
   .delete(deleteEnquiry);
 router.patch('/enquiries/:id/status', updateEnquiryStatus);
+
+// Legal
+router.route('/legal')
+  .get(getLegalData)
+  .patch(updateLegalData);
 
 export default router;

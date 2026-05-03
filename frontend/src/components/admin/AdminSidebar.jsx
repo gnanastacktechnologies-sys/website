@@ -10,7 +10,11 @@ import {
   HiChevronLeft,
   HiChevronRight,
   HiX,
-  HiUser
+  HiUser,
+  HiShieldCheck,
+  HiOutlineDocumentText,
+  HiRefresh,
+  HiXCircle
 } from 'react-icons/hi';
 import { useAuth } from '../../context/AuthContext';
 
@@ -32,6 +36,10 @@ const AdminSidebar = ({ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOp
     { text: 'Projects', icon: <HiCollection />, path: '/admin/projects' },
     { text: 'Enquiries', icon: <HiInboxIn />, path: '/admin/enquiries' },
     { text: 'Account Settings', icon: <HiUser />, path: '/admin/profile' },
+    { text: 'Privacy Policy', icon: <HiShieldCheck />, path: '/admin/legal/privacy' },
+    { text: 'Terms of Service', icon: <HiOutlineDocumentText />, path: '/admin/legal/terms' },
+    { text: 'Refund Policy', icon: <HiRefresh />, path: '/admin/legal/refund' },
+    { text: 'Cancellation Policy', icon: <HiXCircle />, path: '/admin/legal/cancellation' },
   ];
 
   const sidebarClasses = `

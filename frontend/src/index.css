@@ -86,3 +86,14 @@ body {
   animation: loading-bar 2s infinite ease-in-out;
   width: 50%;
 }
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+  display: flex;
+  width: max-content;
+}

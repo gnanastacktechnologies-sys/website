@@ -19,7 +19,7 @@ const Hero = ({ settings }) => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center pt-10 overflow-hidden">
       {/* Background Glows */}
       <div className="glow-circle w-[500px] h-[500px] bg-indigo -top-20 -left-20" />
       <div className="glow-circle w-[400px] h-[400px] bg-electric-blue top-1/2 -right-20" />
